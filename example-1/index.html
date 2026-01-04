@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>React Basic Demo - createElement</title>
+    <link rel="stylesheet" href="index.css" />
+  </head>
+  <body>
+    <header class="non-react-section">
+      <h1>⚠️ This is just HTML ⚠️</h1>
+      <p>This header is plain HTML/CSS</p>
+    </header>
+
+    <div id="root"></div>
+
+    <footer class="non-react-section non-react-footer">
+      <h2>⚠️ This is also just HTML ⚠️</h2>
+      <p>This footer is plain HTML/CSS - not managed by React</p>
+    </footer>
+
+    <!-- Load React & ReactDOM -->
+    <script
+      crossorigin
+      src="https://unpkg.com/react@18/umd/react.development.js"
+    ></script>
+    <script
+      crossorigin
+      src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"
+    ></script>
+    <!-- Load the React app -->
+    <script src="app.js"></script>
+  </body>
+</html>
