@@ -7,11 +7,10 @@ const root = createRoot(rootElement);
 root.render(createElement(App));
 
 function App() {
-  // createElement('element type', 'props', ...'children')
   return createElement(
     "div",
     { className: "app-container" },
-    createElement("h2", { className: "counter" }, "Counter Demo!"),
+    createElement("h2", null, "Counter Demo!"),
     createElement(Counter)
   );
 }
@@ -19,7 +18,7 @@ function App() {
 function Counter() {
   const [count, setCount] = React.useState(0);
 
-  return createElement(
+  const elementTree = createElement(
     "div",
     { className: "counter" },
     createElement("div", { className: "count" }, count),
@@ -43,10 +42,14 @@ function Counter() {
       )
     )
   );
+
+  // Log the live element tree on every render
+  console.log("🔄 Counter render - current count:", count);
+  console.log("📦 React Element Tree:", elementTree);
+
+  return elementTree;
 }
 
 function createLabelElement(label) {
   return createElement("span", null, label);
 }
-
-console.log(App());

@@ -170,7 +170,7 @@ body {
   margin: 0;
 }
 
-.slide-list li {
+.slide-list > li {
   font-size: 1.25rem;
   line-height: 2;
   color: #374151;
@@ -179,13 +179,21 @@ body {
   margin: 0.5rem 0;
 }
 
-.slide-list li::before {
+.slide-list > li::before {
   content: "→";
   position: absolute;
   left: 0;
   color: #58c4dc;
   font-weight: bold;
   font-size: 1.2rem;
+}
+
+.slide-list > li:has(.callout) {
+  padding-left: 0;
+}
+
+.slide-list > li:has(.callout)::before {
+  display: none;
 }
 
 .slide-content-columns {
