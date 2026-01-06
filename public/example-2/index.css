@@ -1,6 +1,6 @@
 body {
   font-family: Arial, sans-serif;
-  max-width: 1200px;
+  max-width: 800px;
   margin: 40px auto;
   padding: 20px;
   background-color: #f5f5f5;
@@ -11,14 +11,8 @@ body {
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
-.demo-layout {
-  display: flex;
-  gap: 30px;
-  align-items: flex-start;
-}
 .counter {
   text-align: center;
-  flex: 0 0 auto;
 }
 button {
   background-color: #61dafb;
@@ -37,28 +31,6 @@ button:hover {
   font-weight: bold;
   color: #282c34;
   margin: 20px 0;
-}
-
-.element-tree-panel {
-  flex: 1;
-  background: #1e1e1e;
-  border-radius: 8px;
-  padding: 16px;
-  overflow: auto;
-}
-.element-tree-panel h3 {
-  color: #fff;
-  margin: 0 0 12px 0;
-  font-size: 14px;
-}
-.element-tree {
-  margin: 0;
-  font-family: "Fira Code", "Consolas", monospace;
-  font-size: 12px;
-  line-height: 1.5;
-  color: #9cdcfe;
-  white-space: pre;
-  overflow-x: auto;
 }
 
 .non-react-section {

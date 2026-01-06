@@ -79,44 +79,54 @@ function App() {
 
             {hasDetails && detailSlide ? (
               <div className="slide-body">
-                {detailSlide.summary && (
-                  <div className="slide-summary-box">
-                    <p>{detailSlide.summary}</p>
-                  </div>
-                )}
-
-                {detailSlide.content.length === 0 ? (
-                  <div className="slide-full-width">
-                    {detailSlide.rightSide?.map((extra, index) => (
-                      <div key={index} className="slide-extra-item">
-                        {extra}
-                      </div>
-                    ))}
-
-                    {detailSlide.code && <CodeBlock code={detailSlide.code} />}
+                {detailSlide.isTitle ? (
+                  <div className="detail-title-slide">
+                    <div className="detail-title-text">{detailSlide.title}</div>
                   </div>
                 ) : (
-                  <div className="slide-content-columns">
-                    <div className="slide-content-left">
-                      <ul className="slide-list">
-                        {detailSlide.content.map((item, index) => (
-                          <li key={index}>{item}</li>
+                  <>
+                    {detailSlide.summary && (
+                      <div className="slide-summary-box">
+                        <p>{detailSlide.summary}</p>
+                      </div>
+                    )}
+
+                    {detailSlide.content.length === 0 ? (
+                      <div className="slide-full-width">
+                        {detailSlide.rightSide?.map((extra, index) => (
+                          <div key={index} className="slide-extra-item">
+                            {extra}
+                          </div>
                         ))}
-                      </ul>
-                    </div>
 
-                    <div className="slide-content-right">
-                      {detailSlide.rightSide?.map((extra, index) => (
-                        <div key={index} className="slide-extra-item">
-                          {extra}
+                        {detailSlide.code && (
+                          <CodeBlock code={detailSlide.code} />
+                        )}
+                      </div>
+                    ) : (
+                      <div className="slide-content-columns">
+                        <div className="slide-content-left">
+                          <ul className="slide-list">
+                            {detailSlide.content.map((item, index) => (
+                              <li key={index}>{item}</li>
+                            ))}
+                          </ul>
                         </div>
-                      ))}
 
-                      {detailSlide.code && (
-                        <CodeBlock code={detailSlide.code} />
-                      )}
-                    </div>
-                  </div>
+                        <div className="slide-content-right">
+                          {detailSlide.rightSide?.map((extra, index) => (
+                            <div key={index} className="slide-extra-item">
+                              {extra}
+                            </div>
+                          ))}
+
+                          {detailSlide.code && (
+                            <CodeBlock code={detailSlide.code} />
+                          )}
+                        </div>
+                      </div>
+                    )}
+                  </>
                 )}
 
                 {detailSlide.notes && (

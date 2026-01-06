@@ -10,7 +10,7 @@ function App() {
   return createElement(
     "div",
     { className: "app-container" },
-    createElement("h2", null, "Counter Demo!"),
+    createElement("h2", { className: "counter" }, "Counter Demo!"),
     createElement(Counter)
   );
 }

@@ -151,6 +151,23 @@ body {
   flex: 1;
 }
 
+.detail-title-slide {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 2rem 0;
+}
+
+.detail-title-text {
+  font-size: 3.25rem;
+  font-weight: 800;
+  color: #23272f;
+  line-height: 1.1;
+  max-width: 900px;
+}
+
 .slide-summary-box {
   background: #f0f9ff;
   border-left: 4px solid #58c4dc;
@@ -306,10 +323,14 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-top: 3rem;
-  padding-top: 2rem;
-  border-top: 2px solid #e5e7eb;
+  position: sticky;
+  bottom: 0;
+  z-index: 10;
+  background: #fff;
   margin-top: auto;
+  padding-top: 1.5rem;
+  padding-bottom: 1.5rem;
+  border-top: 2px solid #e5e7eb;
 }
 
 .nav-btn {
