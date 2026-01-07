@@ -3,7 +3,6 @@ import CodeBlock from "./CodeBlock";
 import IFrame from "./IFrame";
 import Callout from "./Callout";
 import BulletList from "./BulletList";
-import Checkpoint from "./Checkpoint";
 export interface DetailSlide {
   id: number;
   isTitle?: boolean;
@@ -475,6 +474,34 @@ console.log(nested);
             the input.
           </Callout>,
         ],
+      },
+      {
+        id: 4,
+        content: [],
+        rightSide: [
+          <img
+            className="slide-image"
+            src="/reconciliation.png"
+            alt="React Reconciliation Process diagram"
+          />,
+        ],
+      },
+      {
+        id: 5,
+        subtitle: "Key Reconciliation Principles",
+        summary: (
+          <>
+            A really good overview can be found here:{" "}
+            <a
+              href="https://cekrem.github.io/posts/react-reconciliation-deep-dive/"
+              target="_blank"
+              rel="noreferrer"
+            >
+              https://cekrem.github.io/posts/react-reconciliation-deep-dive/
+            </a>
+          </>
+        ),
+        content: [],
       },
     ],
   },

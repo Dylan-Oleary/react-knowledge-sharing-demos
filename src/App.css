@@ -263,6 +263,13 @@ body {
   background: white;
 }
 
+.slide-image {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  border: 1px solid #e5e7eb;
+}
+
 .code-block {
   background: #23272f;
   border-radius: 8px;
