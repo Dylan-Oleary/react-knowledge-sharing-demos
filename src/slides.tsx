@@ -2,26 +2,13 @@ import type { ReactNode } from "react";
 import CodeBlock from "./CodeBlock";
 import IFrame from "./IFrame";
 import Callout from "./Callout";
-
-interface BulletListProps {
-  items: ReactNode[];
-}
-
-export const BulletList = ({ items }: BulletListProps) => (
-  <ul style={{ margin: "8px 0 0 0", paddingLeft: "20px", listStyle: "disc" }}>
-    {items.map((item, index) => (
-      <li
-        key={index}
-        style={{ fontSize: "1rem", lineHeight: "1.6", color: "#4b5563" }}
-      >
-        {item}
-      </li>
-    ))}
-  </ul>
-);
-
+import BulletList from "./BulletList";
+import Checkpoint from "./Checkpoint";
 export interface DetailSlide {
   id: number;
+  isTitle?: boolean;
+  title?: ReactNode;
+  subtitle?: ReactNode;
   summary?: ReactNode;
   content: ReactNode[];
   rightSide?: ReactNode[];
@@ -41,8 +28,7 @@ export const topics: Topic[] = [
   {
     id: 1,
     title: "React: Under the Hood",
-    summary:
-      "A Deep Dive into React Fundamentals\n\nUnderstanding createElement, createRoot, and the Virtual DOM",
+    summary: "A dive into React Fundamentals\n\n",
     detailSlides: [],
     isTitle: true,
   },
@@ -51,7 +37,27 @@ export const topics: Topic[] = [
     title: "What is React?",
     detailSlides: [
       {
+        id: 0,
+        subtitle: "Goals",
+        content: [
+          <span>Explain what React is (and what it isn’t).</span>,
+          <span>
+            See how React <strong>describes</strong> UI as plain JS objects.
+          </span>,
+          <span>
+            Learn about the <strong>Virtual DOM</strong> and{" "}
+            <strong>reconciliation</strong>
+          </span>,
+          <span>Go below the build tools!</span>,
+        ],
+      },
+      {
         id: 1,
+        subtitle: "Question",
+        content: ["What is React?"],
+      },
+      {
+        id: 2,
         content: [
           <span>
             <strong>React is a library</strong>, not a full framework.
@@ -102,7 +108,7 @@ export const topics: Topic[] = [
         ],
       },
       {
-        id: 2,
+        id: 3,
         content: [
           <span>
             <strong>createRoot</strong>: creates a <strong>root object</strong>{" "}
@@ -130,9 +136,15 @@ export const topics: Topic[] = [
               ]}
             />
           </span>,
+          <Callout type="info">
+            <strong>Note:</strong> <code>createElement</code> is effectively the{" "}
+            <strong>legacy</strong> mental model. Modern builds typically
+            compile JSX to <code>jsx/jsxs</code> (the JSX runtime). We’re using
+            <code> createElement</code> for simplicity in examples.
+          </Callout>,
           <span>
-            This lets you <strong>describe the UI</strong> instead of
-            manipulating the DOM directly.
+            This lets you <strong>describe the UI</strong> by creating an
+            element tree instead of manipulating the DOM directly.
           </span>,
         ],
         rightSide: [
@@ -168,7 +180,79 @@ export const topics: Topic[] = [
         ],
       },
       {
-        id: 3,
+        id: 4,
+        subtitle: "Where's the JSX?",
+        content: [
+          <span>
+            <strong>JSX isn’t React</strong>, it’s markup syntax.
+            <BulletList
+              items={[
+                "JSX compiles to function calls (jsx/jsxs) that create React elements.",
+                "It exists to make UI code easier to read and write.",
+              ]}
+            />
+          </span>,
+          <span>
+            It requires a <strong>build tool</strong> (e.g. Babel/Vite) to
+            <strong> transpile</strong> JSX into calls that produce element
+            objects.
+          </span>,
+          <span>
+            Try it yourself:{" "}
+            <a href="https://babeljs.io/repl" target="_blank" rel="noreferrer">
+              Babel REPL
+            </a>
+          </span>,
+        ],
+        rightSide: [
+          <div>
+            <div className="code-compare-label">JSX</div>
+            <CodeBlock
+              code={`function Header() {
+  return <h1>Hello</h1>;
+}
+
+function App() {
+  return (
+    <div className="container">
+      <Header />
+      <p>World</p>
+    </div>
+  );
+}
+
+const root = ReactDOM.createRoot(document.getElementById("root"));
+root.render(<App />);`}
+            />
+          </div>,
+          <div>
+            <div className="code-compare-label">Modern JSX Runtime Output</div>
+            <CodeBlock
+              code={`// After compilation with modern JSX transform
+import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
+
+function Header() {
+  return _jsx("h1", { children: "Hello" });
+}
+
+function App() {
+  return _jsxs("div", { 
+    className: "container", 
+    children: [
+      _jsx(Header, {}),
+      _jsx("p", { children: "World" })
+    ] 
+  });
+}
+
+const root = ReactDOM.createRoot(document.getElementById("root"));
+root.render(_jsx(App, {}));`}
+            />
+          </div>,
+        ],
+      },
+      {
+        id: 5,
         summary: (
           <>
             Source:{" "}
@@ -305,14 +389,14 @@ console.log(nested);
         ],
       },
       {
-        id: 5,
+        id: 6,
         summary: (
           <>
             Source:{" "}
             <a href="/example-2/index.html" target="_blank" rel="noreferrer">
               example-2/index.html
             </a>
-            .
+            . Open dev tools to see the React element tree
           </>
         ),
         content: [],
@@ -322,6 +406,74 @@ console.log(nested);
             title="React element tree demo (example-2/index.html)"
             height={520}
           />,
+        ],
+      },
+      {
+        id: 6,
+        subtitle: "Summary",
+        content: [
+          <span>
+            React is a <strong>UI library</strong> you can add to your app.
+          </span>,
+          <span>
+            <strong>createRoot</strong> tells React which DOM node it owns.
+          </span>,
+          <span>
+            React creates an element tree that <strong>describes</strong> the UI
+          </span>,
+          <span>It's all Javascript!</span>,
+        ],
+      },
+    ],
+  },
+  {
+    id: 3,
+    title: "Reconciliation",
+    detailSlides: [
+      {
+        id: 1,
+        content: [
+          <span>
+            <strong>Reconciliation</strong> is how React updates the DOM
+            efficiently.
+          </span>,
+          <span>
+            On every update, React:
+            <BulletList
+              items={[
+                "Creates a new tree of React elements",
+                "Compares it to the previous tree",
+                "Finds the smallest set of DOM changes needed",
+              ]}
+            />
+          </span>,
+          <span>
+            React does <strong>not</strong> re-render the entire page.
+          </span>,
+        ],
+      },
+      {
+        id: 2,
+        content: [
+          <span>
+            React does <strong>not</strong> diff the real DOM.
+          </span>,
+          <span>
+            It compares two <strong>trees of React elements</strong>:
+            <BulletList
+              items={[
+                "Previous render’s element tree",
+                "Next render’s element tree",
+              ]}
+            />
+          </span>,
+          <span>
+            Reconciliation happens <strong>before</strong> any DOM mutations.
+          </span>,
+          <Callout type="info">
+            DOM updates are the <strong>result</strong> of reconciliation — not
+            the input.
+          </Callout>,
         ],
       },
     ],
